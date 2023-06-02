@@ -19,4 +19,4 @@ class Channel:
         # создать специальный объект для работы с API
         youtube = build('youtube', 'v3', developerKey=Channel.api_key)
         channel = youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
-        return print(json.dumps(channel, indent=2, ensure_ascii=False))
+        print(json.dumps(channel, indent=2, ensure_ascii=False))
