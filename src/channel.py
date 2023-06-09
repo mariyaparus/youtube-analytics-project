@@ -24,6 +24,29 @@ class Channel:
         self.video_count = self.channel_info["items"][0]["statistics"]["videoCount"]
         self.view_count = self.channel_info["items"][0]["statistics"]["viewCount"]
 
+    def __str__(self):
+        return f'{self.title} ({self.url})'
+
+    def __add__(self, other):
+        """Суммирует количество подписчиков"""
+        return int(self.subscribers_count) + int(other.subscribers_count)
+
+    def __sub__(self, other):
+        """Вычитает количество подписчиков"""
+        return int(self.subscribers_count) - int(other.subscribers_count)
+
+    def __lt__(self, other):
+        """Сравнивает по количеству подписчиков"""
+        return int(self.subscribers_count) < int(other.subscribers_count)
+
+    def __ge__(self, other):
+        """Сравнивает по количеству подписчиков"""
+        return int(self.subscribers_count) >= int(other.subscribers_count)
+
+    def __le__(self, other):
+        """Сравнивает по количеству подписчиков"""
+        return int(self.subscribers_count) <= int(other.subscribers_count)
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         channel = self.youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
